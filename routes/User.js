@@ -95,13 +95,14 @@ router.get("/verify", validateToken, async (req, res) => {
 // Route to add experts (ASSUMPTION THAT WE HAVE EXPERTS ALREADY IN THE DATABASE)
 // router.post("/add-experts", async (req, res) => {
 //   const experts = [
-//     { name: "Harshad Mehta", services: "Handling Taxes" },
-//     { name: "DJ Snake", services: "Handling Taxes, Financial Audit" },
-//     { name: "Jason derulo", services: "Financial Planning, Handling Taxes" },
-//     { name: "Anand Vishwa", services: "Financial Audit, Handling Taxes" },
+//     { name: "James King", services: "Handling Taxes", rating: 0 },
+//     { name: "Joey Tribbiani", services: "Handling Taxes, Financial Audit", rating: 0 },
+//     { name: "Ross Geller", services: "Financial Planning, Handling Taxes", rating: 0 },
+//     { name: "Chandler Bing", services: "Financial Audit, Handling Taxes", rating: 0 },
 //     {
-//       name: "Pushkaraj Kulkarni",
-//       services: "Financial Audit, Financial Planning, Handling Taxes",
+//       name: "Miss Chanandaler Bong",
+//       services: "Financial Audit, Financial Planning",
+//       rating: 0,
 //     },
 //   ];
 
@@ -111,6 +112,7 @@ router.get("/verify", validateToken, async (req, res) => {
 //         data: {
 //           name: expert.name,
 //           services: expert.services,
+//           rating: expert.rating,
 //         },
 //       });
 //       console.log(`Created expert: ${createdExpert.name}`);
