@@ -24,4 +24,32 @@ router.get("/get/:id", async (req, res) => {
     res.json(expert);
 })
 
+router.get("/byName", async (req, res) => {
+  const { expertName } = req.body;
+  const expert = await prisma.expert.findFirst({
+      where: {
+          name: expertName,
+      },
+  });
+  res.json(expert);
+})
+
+router.put("/update", validateToken, async (req, res) => {
+    const { expertName, rating } = req.body;
+    const updatedExpert = await prisma.expert.update({
+      where: {
+        name: expertName,
+      },
+      data: {
+        rating: rating,
+      },
+    });
+    
+    if (!updatedExpert) {
+      res.json({ error: 'Error updating expert' });
+    } else {
+      res.json({ message: 'Rating updated' });
+    }
+  });
+  
 module.exports = router;
