@@ -12,6 +12,9 @@ app.use('/auth', userRouter);
 const expertRouter = require('./routes/Expert');
 app.use('/expert', expertRouter);
 
+const bookingRouter = require('./routes/Booking');
+app.use('/booking', bookingRouter);
+
 app.listen(3001, () => {
     console.log('Server running on port 3001');
 });

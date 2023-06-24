@@ -14,4 +14,14 @@ router.get("/all", async (req, res) => {
     res.json(allExperts);
 })
 
+router.get("/get/:id", async (req, res) => {
+    const { id } = req.params;
+    const expert = await prisma.expert.findFirst({
+        where: {
+            id: parseInt(id),
+        },
+    });
+    res.json(expert);
+})
+
 module.exports = router;
