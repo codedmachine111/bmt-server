@@ -9,14 +9,14 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 router.post("/add", validateToken, async (req, res) => {
-    const {service, date, expertId, userId} = req.body;
+    const {service, date, expertName, userId} = req.body;
     const booking = await prisma.serviceTicket.create({
         data: {
             service: service,
             date: date,
             status: 'pending',    
             userId: userId,
-            expertId: expertId,        
+            expertName: expertName,        
         }
     })
     if(!booking){

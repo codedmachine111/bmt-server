@@ -9,7 +9,6 @@ const { validateToken } = require("../middleware/AuthMiddleware");
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-
 // ROUTE TO SIGNUP
 router.post("/signup", async (req, res) => {
   const { firstName, password, email } = req.body;
@@ -34,13 +33,12 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-
 // ROUTE TO LOGIN
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
   const user = await prisma.user.findFirst({
     where: {
-        email: email,
+      email: email,
     },
   });
 
@@ -48,7 +46,7 @@ router.post("/login", async (req, res) => {
     bcrypt.compare(password, user.password).then((match) => {
       if (match) {
         const accessToken = sign(
-          { email: user.email, id: user.id},
+          { email: user.email, id: user.id },
           "important"
         );
         res.json({
@@ -95,10 +93,38 @@ router.get("/verify", validateToken, async (req, res) => {
 // Route to add experts (ASSUMPTION THAT WE HAVE EXPERTS ALREADY IN THE DATABASE)
 // router.post("/add-experts", async (req, res) => {
 //   const experts = [
+//     { name: "Harshad Mehta", services: "Handling Taxes", rating: 0 },
+//     {
+//       name: "DJ Snake",
+//       services: "Handling Taxes, Financial Audit",
+//       rating: 0,
+//     },
+//     {
+//       name: "Rachana Ranande",
+//       services: "Financial Planning, Handling Taxes",
+//       rating: 0,
+//     },
+//     {
+//       name: "Anand Vishwa",
+//       services: "Financial Audit, Handling Taxes",
+//       rating: 0,
+//     },
 //     { name: "James King", services: "Handling Taxes", rating: 0 },
-//     { name: "Joey Tribbiani", services: "Handling Taxes, Financial Audit", rating: 0 },
-//     { name: "Ross Geller", services: "Financial Planning, Handling Taxes", rating: 0 },
-//     { name: "Chandler Bing", services: "Financial Audit, Handling Taxes", rating: 0 },
+//     {
+//       name: "Joey Tribbiani",
+//       services: "Handling Taxes, Financial Audit",
+//       rating: 0,
+//     },
+//     {
+//       name: "Ross Geller",
+//       services: "Financial Planning, Handling Taxes",
+//       rating: 0,
+//     },
+//     {
+//       name: "Chandler Bing",
+//       services: "Financial Audit, Handling Taxes",
+//       rating: 0,
+//     },
 //     {
 //       name: "Miss Chanandaler Bong",
 //       services: "Financial Audit, Financial Planning",
