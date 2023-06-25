@@ -35,13 +35,14 @@ router.get("/byName", async (req, res) => {
 })
 
 router.put("/update", validateToken, async (req, res) => {
-    const { expertName, rating } = req.body;
+    const { expertName, rating, totalRatings } = req.body;
     const updatedExpert = await prisma.expert.update({
       where: {
         name: expertName,
       },
       data: {
         rating: rating,
+        totalRatings: totalRatings,
       },
     });
     

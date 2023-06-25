@@ -26,14 +26,21 @@ router.post("/add", validateToken, async (req, res) => {
     }
 })
 
-router.get("/all", validateToken, async (req, res) => {
-    const bookings = await prisma.serviceTicket.findMany();
-    if(!bookings){
-        res.json({error: 'Error fetching bookings'});
-    }else{
-        res.json(bookings);
+router.get("/all/:id", validateToken, async (req, res) => {
+    const { id } = req.params;
+    const bookings = await prisma.serviceTicket.findMany({
+      where: {
+        userId: parseInt(id),
+      },
+    });
+  
+    if (!bookings) {
+      res.json({ error: "No bookings found" });
+    } else {
+      res.json(bookings);
     }
-})
+  });
+  
 
 router.put("/update", validateToken, async (req, res) => {
     const {id, status} = req.body;
